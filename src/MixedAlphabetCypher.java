@@ -8,18 +8,23 @@ public class MixedAlphabetCypher implements EncryptionMethods{
     String plainText;
     String encryptedText;
 
-    public ArrayList<Integer> getIndices(int count){
-        int i;
-        Random random=new Random();
-        for (i=0;i<count;i++){
-            indices.add(random.nextInt(26));
-            Collections.shuffle(indices);
+    public ArrayList<Integer> getIndices() {
+        for (int i=0;i<26;i++){
+            indices.add(i);
         }
+        Collections.shuffle(indices);
         return indices;
     }
 
-
-
+    public HashMap<Character,Character> mapLetters() {
+        //char[] a_z="abcdefghijklmnopqrstuvwxyz".toCharArray();
+        ArrayList<Integer> shuffledIndices=getIndices();
+        HashMap<Character,Character> letterMapping=new HashMap<>();
+        for (int i=0;i<26;i++){
+            letterMapping.put(a_z[i],Character.toUpperCase(a_z[shuffledIndices.get(i)]));
+        }
+        return letterMapping;
+    }
 
     @Override
     public String encrypt() {
